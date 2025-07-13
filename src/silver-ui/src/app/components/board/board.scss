@@ -1,0 +1,20 @@
+.board {
+  border-radius: 50px;
+  background: #d9ecf2;
+  box-shadow: 8px 8px 20px #bdcdd3,
+    -8px -8px 20px #f5ffff;
+}
+
+.board-circle {
+  box-shadow: 5px 5px 10px #bdcdd3,
+    -5px -5px 10px #f5ffff;
+}
+
+.border-circle-valid-move-cell {
+  border: 1px solid white;
+  box-shadow: inset 5px 5px 10px #b7c7cf,
+    inset -5px -5px 10px #f7ffff;
+}
+
+
+// #83b8c854

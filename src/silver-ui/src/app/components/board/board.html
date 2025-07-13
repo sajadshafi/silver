@@ -1,0 +1,51 @@
+<div class="flex flex-col relative items-center justify-center min-h-screen bg-[#d9ecf2]">
+  <!-- Back Button -->
+  <button class="self-start absolute left-2 top-2 px-2 leading-6 bg-red-500 text-white rounded hover:bg-red-600"
+    routerLink="/">
+    ←
+  </button>
+
+  <!-- Board Container -->
+  <div class="rounded-4xl p-4 border-2 border-white bg-[#d9ecf2] board">
+    <!-- Ranks on Left -->
+    <div class="grid grid-cols-[auto_repeat(8,5.5rem)] grid-rows-[repeat(8,5.5rem)_auto]">
+      <!-- Board squares -->
+      <ng-container *ngFor="let rank of ranks;">
+        <!-- Rank label -->
+        <div class="flex mr-4 items-center justify-center text-sm font-semibold text-gray-500">
+          {{ rank }}
+        </div>
+
+        <!-- Cells -->
+        <ng-container *ngFor="let file of files; let j = index">
+          <div class="flex justify-center items-center"
+              [ngClass]="[isValidMoveCell(getIndex(rank, j+1)) || (selectedPiece && selectedPiece.cell == getIndex(rank, j+1))  ? 'bg-[#83b8c854]'  : '']">
+            <button
+              (click)="onCellSelected(getIndex(rank, j+1))"
+              class="rounded-full shadow-inner w-20 h-20 flex items-center relative justify-center"
+              [ngClass]="[
+                getCellBorderClass(getIndex(rank, j+1)),
+                getCellBgClass(getIndex(rank, j+1))
+              ]">
+              <span class="absolute top-4 text-xs right-4">{{ getIndex(rank, j+1) }}</span>
+              <img
+                *ngIf="board[getIndex(rank, j+1)]?.piece"
+                class="w-14 h-14"
+                [src]="'images/pieces/' + board[getIndex(rank, j+1)].piece?.color + '_' + board[getIndex(rank, j+1)].piece?.type + '.png'"
+                [alt]="board[getIndex(rank, j+1)].piece?.type"
+              />
+            </button>
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <!-- Empty cell for spacing bottom-left -->
+      <div></div>
+
+      <!-- File labels (a–h) -->
+      <div *ngFor="let file of files" class="flex mt-4 items-center justify-center text-sm font-semibold text-gray-500">
+        {{ file }}
+      </div>
+    </div>
+  </div>
+</div>
